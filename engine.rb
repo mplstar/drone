@@ -9,6 +9,7 @@ class Engine
 
   def power_on
     @status = :on
+    self.power = 1
   end
 
   def power_off

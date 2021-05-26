@@ -18,7 +18,7 @@ class Drone
     down: [:z, -20]
   }
 
-  def initialize(n)
+  def initialize(n = 4)
     @engines = []
     n.times { @engines << Engine.new(self) }
     @gyroscope = Gyroscope.new(self)
@@ -41,7 +41,7 @@ class Drone
   end
 
   MOVES.keys.each do |direction|
-    define_method(direction) { _move(direction) }
+    define_method("move_#{direction}") { _move(direction: direction) }
   end
 
   def stablize
@@ -80,7 +80,7 @@ class Drone
 
   def _move(direction:)
     raise "drone cannot move because drone is off" if status == :off
-    @gyroscope.set_velocity(*MOVES[direction.to_s])
+    @gyroscope.set_velocity(*(MOVES[direction]))
     @status = :moving
     puts "drone is moving #{direction}"
   end

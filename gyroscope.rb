@@ -6,6 +6,11 @@ class Gyroscope
     stablize
   end
 
+  def set_velocity(direction, velocity)
+    stablize
+    instance_variable_set(:"@velocity_#{direction}", velocity)
+  end
+
   def stablize
     @velocity_x = 0
     @velocity_y = 0
